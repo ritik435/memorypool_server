@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Post from "../../client/src/components/Posts/Post/Post.js";
 import Posts from "../model/Posts.js"
 
 
@@ -13,11 +14,25 @@ export const getPosts = async (req, res) => {
 }
 
 
+// export const getPostBySearch = async (req, res) => {
+//     const { searchQuery } = req.query;
+
+
+//     try {
+//         const title = new RegExp(searchQuery, 'i');
+//         const posts = await Post.find({ title });
+//         res.json({ posts });
+
+//     } catch (err) {
+//         res.status(404).json({ message: err.message })
+//     }
+// }
+
 
 export const createPost = async (req, res) => {
-    const { title, message, selectedFile, creator, tags } = req.body;
+    const { headline, description, selectedfile, primaryText, CTA } = req.body;
 
-    const newPostMessage = new Posts({ title, message, selectedFile, creator, tags })
+    const newPostMessage = new Posts({ headline, description, selectedfile, primaryText, CTA })
 
     try {
         await newPostMessage.save();
@@ -31,11 +46,11 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
     const { id } = req.params;
-    const { title, message, creator, selectedFile, tags } = req.body;
+    const { headline, description, primaryText, selectedfile, CTA } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    const updatedPost = { creator, title, message, tags, selectedFile, _id: id };
+    const updatedPost = { headline, primaryText, description, CTA, selectedfile, _id: id };
 
     await Posts.findByIdAndUpdate(id, updatedPost, { new: true });
 

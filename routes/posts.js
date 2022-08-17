@@ -4,6 +4,8 @@ import { getPosts, createPost, updatePost, deletePost } from "../controller/post
 const router = express.Router();
 
 router.get("/", getPosts)
+// router.get('/search', getPostBySearch);
+
 router.post("/", createPost)
 router.patch("/:id", updatePost)
 router.delete("/:id", deletePost)

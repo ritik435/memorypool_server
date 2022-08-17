@@ -24,7 +24,7 @@ mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: tr
     .then(() => app.listen(PORT, () => console.log(`Listening on PORT :http://localhost:${PORT}/posts`)))
     .catch((error) => console.log(error.message));
 
-// mongoose.set('useFindAndModify', false);
+
 
 
 
